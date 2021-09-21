@@ -116,13 +116,8 @@
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
-            if (data.payload.data[0].PRODUCT_TYPE == "VAT") {
-                var show = document.getElementById("showSelected02")
-                var showSelector = "showSelected02"
-            } else {
-                var show = document.getElementById("showSelected01")
-                var showSelector = "showSelected01"
-            }
+            var show = document.getElementById("showSelected01")
+            var showSelector = "showSelected01"
             show.innerHTML = ""
             show.style.display = "block"
             temp = ''
@@ -199,7 +194,7 @@
                 temp += '<tr class="clickable">'
                 temp += '<td><a>NO VAT</a></td>'
                 temp += '<td><a>'+noVatItem[i].PRODUCT_NAME+'</a></td>'
-                temp += '<td><a class="btn btn-warning" onclick="openRemove(\''+noVatItem[i].ID+'\')">เลือก</a></td>'
+                temp += '<td><a href="#" class="btn btn-warning" onclick="openRemove(\''+noVatItem[i].ID+'\')">เลือก</a></td>'
             }
         }
         for (var i=0; i<vatItem.length; i++) {
@@ -207,7 +202,7 @@
                 temp += '<tr class="clickable">'
                 temp += '<td><a>VAT</a></td>'
                 temp += '<td><a>'+vatItem[i].PRODUCT_NAME+'</a></td>'
-                temp += '<td><a class="btn btn-warning" onclick="openRemove(\''+vatItem[i].ID+'\')">เลือก</a></td>'
+                temp += '<td><a href="#" class="btn btn-warning" onclick="openRemove(\''+vatItem[i].ID+'\')">เลือก</a></td>'
             }
         }
         temp += '</table>'
