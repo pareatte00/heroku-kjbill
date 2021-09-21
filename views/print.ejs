@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/printStyle.css">
+    <title>Bill No.<%= data.BILL_CODE %> (ID <%= data.ID %>)</title>
+</head>
+
+<body>
+
+    <input id="ID" type="hidden" value="<%= data.ID %>">
+    <input id="BILL_CODE" type="hidden" value="<%= data.BILL_CODE %>">
+    <input id="BILL_DATE" type="hidden" value="<%= data.BILL_DATE %>">
+    <input id="BILL_TYPE" type="hidden" value="<%= data.BILL_TYPE %>">
+    <input id="TAX_RATE" type="hidden" value="<%= data.TAX_RATE %>">
+    <input id="GRAND_TOTAL" type="hidden" value="<%= data.GRAND_TOTAL %>">
+    <input id="PURCHASE_NUMBER" type="hidden" value="<%= data.PURCHASE_NUMBER %>">
+    <input id="ADDRESS_NAME" type="hidden" value="<%= data.ADDRESS_NAME %>">
+    <input id="ZIP_CODE" type="hidden" value="<%= data.ZIP_CODE %>">
+    <input id="SUB_DISTRICT_NAME" type="hidden" value="<%= data.SUB_DISTRICT_NAME %>">
+    <input id="DISTRICT_NAME" type="hidden" value="<%= data.DISTRICT_NAME %>">
+    <input id="PROVINCE_NAME" type="hidden" value="<%= data.PROVINCE_NAME %>">
+    <input id="CUSTOMER_NAME" type="hidden" value="<%= data.CUSTOMER_NAME %>">
+    <input id="TAXPAYER_NUMBER" type="hidden" value="<%= data.TAXPAYER_NUMBER %>">
+
+    <div id="billPrinting">
+        (กำลังโหลดหน้าใบกำกับภาษี)
+    </div>
+</body>
+
+<script>
+
+    var billPrinting = document.getElementById("billPrinting")
+    var id = document.getElementById("ID").value
+    var billCode = document.getElementById("BILL_CODE").value
+    var billDate = document.getElementById("BILL_DATE").value
+    var billType = document.getElementById("BILL_TYPE").value
+    var taxRate = document.getElementById("TAX_RATE").value
+    var grandTotal = document.getElementById("GRAND_TOTAL").value
+    var purchaseNumber = document.getElementById("PURCHASE_NUMBER").value
+    var addressName = document.getElementById("ADDRESS_NAME").value
+    var zipCode = document.getElementById("ZIP_CODE").value
+    var subDistrict = document.getElementById("SUB_DISTRICT_NAME").value
+    var district = document.getElementById("DISTRICT_NAME").value
+    var province = document.getElementById("PROVINCE_NAME").value
+    if (province == "กรุงเทพมหานคร") {
+        subDistrict = "แขวง"+subDistrict
+    } else {
+        subDistrict = "ตำบล"+subDistrict
+        district = "อำเภอ"+district
+    }
+    var customerName = document.getElementById("CUSTOMER_NAME").value
+    var taxpayerNumber = document.getElementById("TAXPAYER_NUMBER").value
+    var allItem = []
+    var totalNoVat = 0
+    var taxTotal = 0
+
+    fetch('https://bill-project-api.herokuapp.com/product/getAll/byBillId?billId='+id, {
+        method: 'GET'
+    }).then(res => res.json())
+    .then(data => {
+        var temp = data.payload.data
+        for (var i=temp.length-1; i>=0; i--) {
+            allItem.push(temp[i])
+        }
+        createPage()
+    })
+
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    function BAHTTEXT(num, suffix) {
+        'use strict';
+        
+        if (typeof suffix === 'undefined') {
+            suffix = 'บาทถ้วน';
+        }
+        
+        num = num || 0;
+        num = num.toString().replace(/[, ]/g, ''); // remove commas, spaces
+        
+        if (isNaN(num) || (Math.round(parseFloat(num) * 100) / 100) === 0) {
+            return 'ศูนย์บาทถ้วน';
+        } else {
+            
+            var t = ['', 'สิบ', 'ร้อย', 'พัน', 'หมื่น', 'แสน', 'ล้าน'],
+                n = ['', 'หนึ่ง', 'สอง', 'สาม', 'สี่', 'ห้า', 'หก', 'เจ็ด', 'แปด', 'เก้า'],
+                len,
+                digit,
+                text = '',
+                parts,
+                i;
+            
+            if (num.indexOf('.') > -1) { // have decimal
+                
+                /* 
+                * precision-hack
+                * more accurate than parseFloat the whole number 
+                */
+                
+                parts = num.toString().split('.');
+                
+                num = parts[0];
+                parts[1] = parseFloat('0.' + parts[1]);
+                parts[1] = (Math.round(parts[1] * 100) / 100).toString(); // more accurate than toFixed(2)
+                parts = parts[1].split('.');
+                
+                if (parts.length > 1 && parts[1].length === 1) {
+                    parts[1] = parts[1].toString() + '0';
+                }
+                
+                num = parseInt(num, 10) + parseInt(parts[0], 10);
+                
+                
+                /* 
+                * end - precision-hack
+                */
+                text = num ? BAHTTEXT(num) : '';
+                
+                if (parseInt(parts[1], 10) > 0) {
+                    text = text.replace('ถ้วน', '') + BAHTTEXT(parts[1], 'สตางค์');
+                }
+                
+                return text;
+                
+            } else {
+
+                if (num.length > 7) { // more than (or equal to) 10 millions
+
+                    var overflow = num.substring(0, num.length - 6);
+                    var remains = num.slice(-6);
+                    return BAHTTEXT(overflow).replace('บาทถ้วน', 'ล้าน') + BAHTTEXT(remains).replace('ศูนย์', '');
+
+                } else {
+                    
+                    len = num.length;
+                    for (i = 0; i < len; i = i + 1) {
+                        digit = parseInt(num.charAt(i), 10);
+                        if (digit > 0) {
+                            if (len > 2 && i === len - 1 && digit === 1 && suffix !== 'สตางค์') {
+                                text += 'เอ็ด' + t[len - 1 - i];
+                            } else {
+                                text += n[digit] + t[len - 1 - i];
+                            }
+                        }
+                    }
+                    
+                    // grammar correction
+                    text = text.replace('หนึ่งสิบ', 'สิบ');
+                    text = text.replace('สองสิบ', 'ยี่สิบ');
+                    text = text.replace('สิบหนึ่ง', 'สิบเอ็ด');
+                    
+                    return text + suffix;
+                }
+                
+            }
+            
+        }
+    }
+
+    function createPage() {
+        for (var i=0; i<allItem.length; i++) {
+            totalNoVat += allItem[i].AMOUNT*1
+        }taxTotal = totalNoVat*(taxRate/100)
+        var page = Math.ceil((allItem.length/20))
+        var tempPage = ""
+        var success = false
+        for (var i=0; i<page; i++) {
+            tempPage += "<div style='height: 1056px;'>"
+            tempPage +=     "<div style='padding-top: 20px'> </div>"
+            tempPage +=     "<div style='padding-top: 140px; padding-left: 75px;'>"
+            tempPage +=         "<p class='print'>"+customerName+"</p>"
+            tempPage +=         "<p class='print' style='margin-top: -25px;'>"+addressName+"</p>"
+            tempPage +=         "<p class='print' style='margin-top: -25px;'>"+subDistrict+" "+district+" "+province+" "+zipCode
+            tempPage +=         "<p class='print' style='margin-top: -25px;'>เลขประจำตัวผู้เสียภาษีอากร&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+taxpayerNumber+"</p>"
+            tempPage +=     "</div>"
+            tempPage +=     "<div style='margin-top: -160px; padding-left: 630px;'>"
+            tempPage +=         "<p class='print'>"+billCode+"</p>"
+            tempPage +=         "<p class='print' style='margin-top: 17px;'>"+billDate.slice(8, 10)+"/"+billDate.slice(5, 7)+"/"+billDate.slice(0, 4)+"</p>"
+            tempPage +=         "<p class='print' style='margin-top: 20px;'>"+purchaseNumber+"</p>"
+            tempPage +=     "</div>"
+            tempPage +=     "<div style='padding-top: 40px; padding-left: 30px; height: 530px;'>"
+            for (var j=0; j<20; j++) {
+                tempPage +=     "<table>"
+                tempPage +=         "<tbody>"
+                tempPage +=             "<tr>"
+                tempPage +=                 '<td width="85px" class="print"><p style="height: 2px">'+allItem[j+(i*20)].PRODUCT_CODE+'</p></td>'
+                tempPage +=                 '<td width="300px" class="print" style="padding-left: 10px;"><p style="height: 2px">'+allItem[j+(i*20)].PRODUCT_DETAIL+'</p></td>'
+                tempPage +=                 '<td width="100px" class="print" style="text-align: right; padding-right: 15px;"><p style="height: 2px">'+numberWithCommas(allItem[j+(i*20)].QUANTITY)+'</p></td>'
+                tempPage +=                 '<td width="110px" class="print" style="text-align: right; padding-right: 15px;"><p style="height: 2px">'+numberWithCommas((allItem[j+(i*20)].AMOUNT/allItem[j+(i*20)].QUANTITY).toFixed(2))+'</p></td>'
+                tempPage +=                 '<td width="132px" class="print" style="text-align: right; padding-right: 15px;"><p style="height: 2px">'+numberWithCommas(allItem[j+(i*20)].AMOUNT)+'</p></td>'
+                tempPage +=             '</tr>'
+                tempPage +=         '</tbody>'
+                tempPage +=     '</table>'
+                if ((j+1)+(i*20) == allItem.length) {
+                    success = true
+                    break
+                }
+            }
+            tempPage +=     "</div>"
+
+            if (success == true) {
+                tempPage +=     "<div style='margin-top: 62px; text-align: right; width: 600px;'>"
+                if (taxRate == 0) {
+                    tempPage +=     "<p class='print'>-</p>"
+                } else {
+                    tempPage +=     "<p class='print' style='padding-left: 5px;'>"+(taxRate*1).toFixed(0)+"</p>"
+                }tempPage +=    "</div>"
+                tempPage +=     "<div style='margin-top: -94px; text-align: right; width: 744px;'>"
+                tempPage +=         "<p class='print'>"+numberWithCommas(totalNoVat.toFixed(2))+"</p>"
+                if (taxRate == 0) {
+                    tempPage +=     "<p class='print' style='margin-top: -8px;'>-</p>"
+                } else {
+                    tempPage +=     "<p class='print' style='margin-top: -8px;'>"+numberWithCommas(taxTotal.toFixed(2))+"</p>"
+                }
+                tempPage +=         "<p class='print' style='margin-top: -10px;'>"+numberWithCommas(grandTotal)+"</p>"
+                tempPage +=     "</div>"
+                tempPage +=     "<div style='margin-top: -50px; padding-left: 25px;'>"
+                tempPage +=         "<p class='print' style='margin-top: -4px; width: 500px; text-align: center;'>"+BAHTTEXT(grandTotal)+"</p>"
+                tempPage +=     "</div>"
+            } else {
+                tempPage +=     "<div style='margin-top: 67px; text-align: right; width: 500px;'>"
+                tempPage +=         "<p class='print' style='padding-left: 5px;'>รายการสินค้ายกไปแผ่นที่ "+(i+2)+"</p>"
+                tempPage +=    "</div>"
+            }
+
+            tempPage += "</div>"
+        }
+        billPrinting.innerHTML = tempPage
+    }
+
+
+</script>
+
+</html>

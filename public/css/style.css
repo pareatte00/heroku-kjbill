@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Pridi:wght@200;300;400;500;600;700&display=swap');
+
+* {
+    font-family: 'Pridi', sans-serif;
+}
+
+.u-modify {
+    margin-top: -100px;
+}
+
+.c-modify {
+    margin-top: 50px;
+}
+
+.l-modify {
+    margin-top: 100px;
+}
+
+.s-20 {
+    font-size: 20px;
+}
+
+.s-30 {
+    font-size: 30px;
+}
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+.tab button:hover {
+    color: grey;
+}
+
+.tab button.active {
+    border-top: 3px solid #FFC107;
+}
+
+.clickable:hover {
+    background: lightgrey;
+    text-decoration: none;
+    color: black;
+}
+
+.t-modify {
+    background-color: lightgrey;
+}
+
+th {
+    padding: 10px;
+}
+
+td a {
+    text-decoration: none;
+    color: black;
+    display: block;
+    padding: 10px;
+    border: none;
+    background: none;
+    text-align:left;
+}
+
+td button {
+    text-decoration: none;
+    color: black;
+    display: block;
+    padding: 10px;
+    border: none;
+    background: none;
+    text-align:left;
+}
+
+td a:hover {
+    color: black;
+    border: none;
+    background: none;
+    text-align:left;
+}

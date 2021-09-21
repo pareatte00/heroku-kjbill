@@ -1,0 +1,31 @@
+{
+  "name": "Real_Project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:fangakson/heroku_kajornbill.git",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index",
+    "start": "node index.js",
+    "heroku-postbuild": "npm run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "cookie-session": "^1.4.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-validator": "^6.12.0",
+    "node-fetch": "^2.6.1",
+    "nodemon": "^2.0.9"
+  },
+  "engines": {
+    "node": "14.17.1",
+    "npm": "6.14.13"
+  },
+  "devDependencies": {},
+  "description": ""
+}
