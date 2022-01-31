@@ -577,11 +577,35 @@
                 temp02 = temp02*fv
                 tfp.innerHTML = temp02.toFixed(2)
             } else {
+                alert("* ลูกค้าไม่ได้เป็นเจ้าของสินค้านี้ หรือรหัสสินค้าซ้ำกันระหว่างบริษัท (สินค้าจะทำการเพิ่มให้เป็นปกติ)")
+                var tester = "testing message"
                 var elm = document.getElementById('unknownItem')
-                elm.innerHTML = "* ลูกค้าไม่ได้เป็นเจ้าของสินค้านี้ หรือไม่ได้อยู่ในรายการของประเภทใบกำกับภาษีนี้"
-                elm.classList.add('text-danger')
-                elm.classList.remove('text-success')
-                return
+                elm.innerHTML = "* เพิ่มสินค้า "+data.payload.data[0].PRODUCT_DETAIL+" เป็นจำนวน "+elm03+" รายการ"
+                elm.classList.remove('text-danger')
+                elm.classList.add('text-success')
+                arrayList.push({"listId": listCount, "productId": data.payload.data[0].ID, "productName": data.payload.data[0].PRODUCT_DETAIL, "qty": elm03, "unitPrice": data.payload.data[0].UNIT_PRICE, "totalPrice": data.payload.data[0].UNIT_PRICE*elm03})
+                var table = document.getElementById('billitem')
+                var temp = '<table class="table"><tr class="t-modify"><th style="max-width: 100px;">รหัสสินค้า</th><th style="max-width: 350px;">ชื่อสินค้า</th><th style="max-width: 75px;">จำนวน</th><th style="max-width: 100px;">หน่วยละ</th><th style="max-width: 100px;">จำนวนเงิน</th><th style="max-width: 100px;">ลบสินค้า</th></tr>'
+                for (var i=0; i<arrayList.length; i++) {
+                    temp += '<tr id="'+arrayList[i].listId+'" class="align-middle">'
+                    temp += '<td>'+arrayList[i].productId+'</td>'
+                    temp += '<td>'+arrayList[i].productName+'</td>'
+                    temp += '<td>'+arrayList[i].qty+'</td>'
+                    temp += '<td>'+arrayList[i].unitPrice+'</td>'
+                    temp += '<td>'+arrayList[i].totalPrice.toFixed(2)+'</td>'
+                    temp += '<td><a class="text-danger" href="#" onclick="removeItem(\''+arrayList[i].listId+'\')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/></svg></a></td></tr>'
+                }temp += '</table>'
+                table.innerHTML = temp
+                listCount += 1
+                var fp = document.getElementById("finalPrice")
+                var fv = (document.getElementById("finalVat").value/100)+1
+                var tfp = document.getElementById("finalTotalPrice")
+                temp02 = 0
+                for (var i=0; i< arrayList.length; i++) {
+                    temp02 += arrayList[i].totalPrice
+                }fp.innerHTML = temp02.toFixed(2)
+                temp02 = temp02*fv
+                tfp.innerHTML = temp02.toFixed(2)
             }
         })
     }
