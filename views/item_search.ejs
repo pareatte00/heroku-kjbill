@@ -189,22 +189,32 @@
         searchBox = document.getElementById("searchBox").value
         var table = document.getElementById('itemnovat')
         var temp = '<table><tr><th>ประเภท</th><th>รหัสสินค้า</th><th>สินค้า</th><th></th></tr>'
-        for (var i=0; i<10; i++) {
+        var count = 0
+        for (var i=0; i<noVatItem.length; i++) {
             if (noVatItem[i].PRODUCT_NAME.includes(searchBox) || noVatItem[i].PRODUCT_CODE.includes(searchBox)) {
                 temp += '<tr class="clickable">'
                 temp += '<td><a>NO VAT</a></td>'
                 temp += '<td><a>'+noVatItem[i].PRODUCT_CODE+'</a></td>'
                 temp += '<td><a>'+noVatItem[i].PRODUCT_NAME+'</a></td>'
                 temp += '<td><a href="#" class="btn btn-warning" onclick="openRemove(\''+noVatItem[i].ID+'\')">เลือก</a></td>'
+                count++
+            }
+            if (count == 20) {
+                break;
             }
         }
-        for (var i=0; i<10; i++) {
+        count = 0
+        for (var i=0; i<vatItem.length; i++) {
             if (vatItem[i].PRODUCT_NAME.includes(searchBox) || vatItem[i].PRODUCT_CODE.includes(searchBox)) {
                 temp += '<tr class="clickable">'
                 temp += '<td><a>VAT</a></td>'
                 temp += '<td><a>'+vatItem[i].PRODUCT_CODE+'</a></td>'
                 temp += '<td><a>'+vatItem[i].PRODUCT_NAME+'</a></td>'
                 temp += '<td><a href="#" class="btn btn-warning" onclick="openRemove(\''+vatItem[i].ID+'\')">เลือก</a></td>'
+                count++
+            }
+            if (count == 20) {
+                break;
             }
         }
         temp += '</table>'
