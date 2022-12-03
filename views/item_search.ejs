@@ -112,7 +112,7 @@
 
     function openRemove(id)
     {
-        fetch('https://bill-project-api.herokuapp.com/product/get/byProductId?productId='+id, {
+        fetch('https://kjbill-api.cyclic.app/product/get/byProductId?productId='+id, {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -151,7 +151,7 @@
 
     function removeItem(itemId)
     {
-        fetch('https://bill-project-api.herokuapp.com/product/delete?productId='+itemId, {
+        fetch('https://kjbill-api.cyclic.app/product/delete?productId='+itemId, {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -166,7 +166,7 @@
         selectedProduct = document.getElementById("selectedProduct").value
         selectedPrice = document.getElementById("selectedPrice").value
         selectedType = document.getElementById("selectedType").value
-        fetch('https://bill-project-api.herokuapp.com/product/update', {
+        fetch('https://kjbill-api.cyclic.app/product/update', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -231,7 +231,7 @@
         vatItem = item
     }
 
-    fetch('https://bill-project-api.herokuapp.com/product/get/byType?productTypeId=1&rowPerPage=2000&numOfPage=1', {
+    fetch('https://kjbill-api.cyclic.app/product/get/byType?productTypeId=1&rowPerPage=2000&numOfPage=1', {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -239,7 +239,7 @@
                 fetchNoVatItem(noVatItem)
             })
 
-    fetch('https://bill-project-api.herokuapp.com/product/get/byType?productTypeId=2&rowPerPage=2000&numOfPage=1', {
+    fetch('https://kjbill-api.cyclic.app/product/get/byType?productTypeId=2&rowPerPage=2000&numOfPage=1', {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
