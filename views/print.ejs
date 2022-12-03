@@ -59,7 +59,7 @@
     var totalNoVat = 0
     var taxTotal = 0
 
-    fetch('https://bill-project-api.herokuapp.com/product/getAll/byBillId?billId='+id, {
+    fetch('https://kjbill-api.cyclic.app/product/getAll/byBillId?billId='+id, {
         method: 'GET'
     }).then(res => res.json())
     .then(data => {

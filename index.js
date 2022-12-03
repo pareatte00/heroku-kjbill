@@ -39,7 +39,7 @@ const ifLoggedIn = (req, res, next) => {
 }
 
 app.get('/', ifNotLoggedIn, (req, res, next) => {
-    fetch('https://bill-project-api.herokuapp.com/admin/get/data', {
+    fetch('https://kjbill-api.cyclic.app/admin/get/data', {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + req.session.token,
@@ -58,7 +58,7 @@ app.get('/passchange', ifLoggedIn, (req, res, next) => {
 
 app.post('/submitchange', ifLoggedIn, (req, res, next) => {
     const { emailReceived } = req.body
-    fetch('https://bill-project-api.herokuapp.com/admin/forgotPassword', {
+    fetch('https://kjbill-api.cyclic.app/admin/forgotPassword', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -75,7 +75,7 @@ app.post('/submitchange', ifLoggedIn, (req, res, next) => {
 })
 
 app.get('/item', ifNotLoggedIn, (req, res, next) => {
-    fetch('https://bill-project-api.herokuapp.com/admin/get/data', {
+    fetch('https://kjbill-api.cyclic.app/admin/get/data', {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + req.session.token,
@@ -89,7 +89,7 @@ app.get('/item', ifNotLoggedIn, (req, res, next) => {
 })
 
 app.get('/cus', ifNotLoggedIn, (req, res, next) => {
-    fetch('https://bill-project-api.herokuapp.com/admin/get/data', {
+    fetch('https://kjbill-api.cyclic.app/admin/get/data', {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + req.session.token,
@@ -104,7 +104,7 @@ app.get('/cus', ifNotLoggedIn, (req, res, next) => {
 })
 
 app.get('/user', ifNotLoggedIn, (req, res, next) => {
-    fetch('https://bill-project-api.herokuapp.com/admin/get/data', {
+    fetch('https://kjbill-api.cyclic.app/admin/get/data', {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + req.session.token,
@@ -118,7 +118,7 @@ app.get('/user', ifNotLoggedIn, (req, res, next) => {
 })
 
 app.get('/bill', ifNotLoggedIn, (req, res, next) => {
-    fetch('https://bill-project-api.herokuapp.com/admin/get/data', {
+    fetch('https://kjbill-api.cyclic.app/admin/get/data', {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + req.session.token,
@@ -132,7 +132,7 @@ app.get('/bill', ifNotLoggedIn, (req, res, next) => {
 })
 
 app.get('/bill_create', ifNotLoggedIn, (req, res, next) => {
-    fetch('https://bill-project-api.herokuapp.com/admin/get/data', {
+    fetch('https://kjbill-api.cyclic.app/admin/get/data', {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + req.session.token,
@@ -148,7 +148,7 @@ app.get('/bill_create', ifNotLoggedIn, (req, res, next) => {
 })
 
 app.get('/cus_create', ifNotLoggedIn, (req, res, next) => {
-    fetch('https://bill-project-api.herokuapp.com/admin/get/data', {
+    fetch('https://kjbill-api.cyclic.app/admin/get/data', {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + req.session.token,
@@ -163,7 +163,7 @@ app.get('/cus_create', ifNotLoggedIn, (req, res, next) => {
 })
 
 app.get('/item_create', ifNotLoggedIn, (req, res, next) => {
-    fetch('https://bill-project-api.herokuapp.com/admin/get/data', {
+    fetch('https://kjbill-api.cyclic.app/admin/get/data', {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + req.session.token,
@@ -178,7 +178,7 @@ app.get('/item_create', ifNotLoggedIn, (req, res, next) => {
 })
 
 app.get('/item_search', ifNotLoggedIn, (req, res, next) => {
-    fetch('https://bill-project-api.herokuapp.com/admin/get/data', {
+    fetch('https://kjbill-api.cyclic.app/admin/get/data', {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + req.session.token,
@@ -193,7 +193,7 @@ app.get('/item_search', ifNotLoggedIn, (req, res, next) => {
 })
 
 app.get('/cus_add_create', ifNotLoggedIn, (req, res, next) => {
-    fetch('https://bill-project-api.herokuapp.com/admin/get/data', {
+    fetch('https://kjbill-api.cyclic.app/admin/get/data', {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + req.session.token,
@@ -209,7 +209,7 @@ app.get('/cus_add_create', ifNotLoggedIn, (req, res, next) => {
 
 app.post('/printpage', ifNotLoggedIn, (req, res, next) => {
     const { selectedBill } = req.body
-    fetch('https://bill-project-api.herokuapp.com/bill/get/byBillId?billId='+selectedBill, {
+    fetch('https://kjbill-api.cyclic.app/bill/get/byBillId?billId='+selectedBill, {
         method: 'GET'
     }).then(res => res.json()).then(data => {
         res.render('print', {
@@ -220,7 +220,7 @@ app.post('/printpage', ifNotLoggedIn, (req, res, next) => {
 
 app.post('/login', ifLoggedIn, (req, res, next) => {
     const { username, password } = req.body
-    fetch('https://bill-project-api.herokuapp.com/admin/login', {
+    fetch('https://kjbill-api.cyclic.app/admin/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -245,7 +245,7 @@ app.post('/login', ifLoggedIn, (req, res, next) => {
 
 app.post('/createcus', ifNotLoggedIn, (req, res, next) => {
     const { customerName, customerTax } = req.body
-    fetch('https://bill-project-api.herokuapp.com/customer/register', {
+    fetch('https://kjbill-api.cyclic.app/customer/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -263,7 +263,7 @@ app.post('/createcus', ifNotLoggedIn, (req, res, next) => {
 
 app.post('/createadd', ifNotLoggedIn, (req, res, next) => {
     const { customerId, customerAddress, customerSubdistrict } = req.body
-    fetch('https://bill-project-api.herokuapp.com/address/insert/address', {
+    fetch('https://kjbill-api.cyclic.app/address/insert/address', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -283,7 +283,7 @@ app.post('/createadd', ifNotLoggedIn, (req, res, next) => {
 
 app.post('/createitem', ifNotLoggedIn, (req, res, next) => {
     const { customerId, itemType, itemId, itemName, itemPrice } = req.body
-    fetch('https://bill-project-api.herokuapp.com/product/add', {
+    fetch('https://kjbill-api.cyclic.app/product/add', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
