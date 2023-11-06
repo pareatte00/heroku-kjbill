@@ -107,7 +107,7 @@
         }else if (s2.id == 'district') {
             s3.innerHTML = ""
             s4.innerHTML = ""
-            fetch('https://kjbill-api.cyclic.app/address/get/district?provinceId='+s1.value, {
+            fetch('https://apikjb-pdt-integration.cyclic.app/address/get/district?provinceId='+s1.value, {
                 method: 'GET'
             }).then(res => res.json())
             .then(data => {
@@ -126,7 +126,7 @@
                 })
         }else if (s2.id == 'subdistrict') {
             s4.innerHTML = ""
-            fetch('https://kjbill-api.cyclic.app/address/get/subDistrict?districtId='+s1.value, {
+            fetch('https://apikjb-pdt-integration.cyclic.app/address/get/subDistrict?districtId='+s1.value, {
                 method: 'GET'
             }).then(res => res.json())
             .then(data => {
@@ -146,7 +146,7 @@
         }
     }
 
-    fetch('https://kjbill-api.cyclic.app/address/get/province', {
+    fetch('https://apikjb-pdt-integration.cyclic.app/address/get/province', {
         method: 'GET'
     }).then(res => res.json())
     .then(data => {
@@ -161,7 +161,7 @@
         elm.appendChild(df);
         })
 
-    fetch('https://kjbill-api.cyclic.app/customer/get/allCustomer?rowPerPage=100&numOfPage=1', {
+    fetch('https://apikjb-pdt-integration.cyclic.app/customer/get/allCustomer?rowPerPage=100&numOfPage=1', {
         method: 'GET'
     }).then(res => res.json())
     .then(data => {
