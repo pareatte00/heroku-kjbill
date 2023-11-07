@@ -220,14 +220,14 @@
             s5.value = ""
             s6.value = ""
 
-            fetch('https://kjbill-api.cyclic.app/customer/get/customerById?customerId='+elm.value, {
+            fetch('https://apikjb-pdt-integration.cyclic.app/customer/get/customerById?customerId='+elm.value, {
                 method: 'GET'
             }).then(res => res.json())
             .then(data => {
                 s1.value = data.payload.data[0].TAXPAYER_NUMBER
             })
 
-            fetch('https://kjbill-api.cyclic.app/product/getAll/byCustomerId?customerId='+elm.value+'&rowPerPage=500&numOfPage=1', {
+            fetch('https://apikjb-pdt-integration.cyclic.app/product/getAll/byCustomerId?customerId='+elm.value+'&rowPerPage=500&numOfPage=1', {
                 method: 'GET'
             }).then(res => res.json())
             .then(data => {
@@ -312,7 +312,7 @@
                 }
             })
 
-            fetch('https://kjbill-api.cyclic.app/address/get/customerAddress/all', {
+            fetch('https://apikjb-pdt-integration.cyclic.app/address/get/customerAddress/all', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -362,7 +362,7 @@
             s4.value = ""
             s5.value = ""
             s6.value = ""
-            fetch('https://kjbill-api.cyclic.app/address/get/customerAddress/byAddressId', {
+            fetch('https://apikjb-pdt-integration.cyclic.app/address/get/customerAddress/byAddressId', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -537,7 +537,7 @@
             elm.classList.remove('text-success')
             return
         }
-        fetch('https://kjbill-api.cyclic.app/product/get/byProductCode?productCode='+itemCode, {
+        fetch('https://apikjb-pdt-integration.cyclic.app/product/get/byProductCode?productCode='+itemCode, {
             method: 'GET'
         }).then(res => res.json()).then(data => {
             if (data.success == false) {
@@ -651,7 +651,7 @@
         var selectedBillDate = document.getElementById("billDate").value
         var selectedBillCode = document.getElementById("billCode").value
         var selectedRemark = document.getElementById("remark").value
-        fetch('https://kjbill-api.cyclic.app/bill/add', {
+        fetch('https://apikjb-pdt-integration.cyclic.app/bill/add', {
             method: 'POST',
             headers: {
                 'Authorization': 'Bearer ' + selectedToken,
@@ -695,7 +695,7 @@
         sameBillShower.innerHTML = ""
     }
 
-    fetch('https://kjbill-api.cyclic.app/customer/get/allCustomer?rowPerPage=100&numOfPage=1', {
+    fetch('https://apikjb-pdt-integration.cyclic.app/customer/get/allCustomer?rowPerPage=100&numOfPage=1', {
         method: 'GET'
     }).then(res => res.json())
     .then(data => {
@@ -715,14 +715,14 @@
         elm.appendChild(df);
     })
 
-    fetch('https://kjbill-api.cyclic.app/bill/get/byType?billTypeId=1&rowPerPage=10000&numOfPage=1', {
+    fetch('https://apikjb-pdt-integration.cyclic.app/bill/get/byType?billTypeId=1&rowPerPage=10000&numOfPage=1', {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
             allBilling01 = data
     })
 
-    fetch('https://kjbill-api.cyclic.app/bill/get/byType?billTypeId=2&rowPerPage=10000&numOfPage=1', {
+    fetch('https://apikjb-pdt-integration.cyclic.app/bill/get/byType?billTypeId=2&rowPerPage=10000&numOfPage=1', {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {

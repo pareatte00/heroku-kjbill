@@ -95,7 +95,7 @@
 
 <script>
 
-    fetch('https://kjbill-api.cyclic.app/customer/get/allCustomer?rowPerPage=500&numOfPage=1', {
+    fetch('https://apikjb-pdt-integration.cyclic.app/customer/get/allCustomer?rowPerPage=500&numOfPage=1', {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -120,7 +120,7 @@
             return
         }
         currentPage = page.value
-        fetch('https://kjbill-api.cyclic.app/customer/get/allCustomer?rowPerPage=10&numOfPage='+page.value, {
+        fetch('https://apikjb-pdt-integration.cyclic.app/customer/get/allCustomer?rowPerPage=10&numOfPage='+page.value, {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -135,7 +135,7 @@
             })
     }
 
-    fetch('https://kjbill-api.cyclic.app/customer/get/allCustomer?rowPerPage=10&numOfPage=1', {
+    fetch('https://apikjb-pdt-integration.cyclic.app/customer/get/allCustomer?rowPerPage=10&numOfPage=1', {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -176,7 +176,7 @@
         }
         cusId.style.backgroundColor = "#d3d3d3"
 
-        fetch('https://kjbill-api.cyclic.app/address/get/customerAddress/all', {
+        fetch('https://apikjb-pdt-integration.cyclic.app/address/get/customerAddress/all', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -205,7 +205,7 @@
 
     function removeAddress(addressId)
     {
-        fetch('https://kjbill-api.cyclic.app/address/delete/customerAddress/byId?addressId='+addressId, {
+        fetch('https://apikjb-pdt-integration.cyclic.app/address/delete/customerAddress/byId?addressId='+addressId, {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -216,7 +216,7 @@
     function deleteCustomer(customerId) {
         var deleterInput = document.getElementById("deleterId")
         if (deleterInput.value == selectedCusData.CUSTOMER_NAME) {
-            fetch('https://kjbill-api.cyclic.app/customer/delete/customerById?customerId='+selectedCusData.ID, {
+            fetch('https://apikjb-pdt-integration.cyclic.app/customer/delete/customerById?customerId='+selectedCusData.ID, {
                 method: 'GET'
             }).then(res => res.json())
             .then(data => {
