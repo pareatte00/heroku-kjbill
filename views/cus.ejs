@@ -94,8 +94,8 @@
 </header>
 
 <script>
-
-    fetch('https://apikjb-pdt-integration.cyclic.app/customer/get/allCustomer?rowPerPage=500&numOfPage=1', {
+    var apiUrl = document.getElementById("api_url")
+    fetch(apiUrl + '/customer/get/allCustomer?rowPerPage=500&numOfPage=1', {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -120,7 +120,7 @@
             return
         }
         currentPage = page.value
-        fetch('https://apikjb-pdt-integration.cyclic.app/customer/get/allCustomer?rowPerPage=10&numOfPage='+page.value, {
+        fetch(apiUrl + '/customer/get/allCustomer?rowPerPage=10&numOfPage='+page.value, {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -135,7 +135,7 @@
             })
     }
 
-    fetch('https://apikjb-pdt-integration.cyclic.app/customer/get/allCustomer?rowPerPage=10&numOfPage=1', {
+    fetch(apiUrl + '/customer/get/allCustomer?rowPerPage=10&numOfPage=1', {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -176,7 +176,7 @@
         }
         cusId.style.backgroundColor = "#d3d3d3"
 
-        fetch('https://apikjb-pdt-integration.cyclic.app/address/get/customerAddress/all', {
+        fetch(apiUrl + '/address/get/customerAddress/all', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -205,7 +205,7 @@
 
     function removeAddress(addressId)
     {
-        fetch('https://apikjb-pdt-integration.cyclic.app/address/delete/customerAddress/byId?addressId='+addressId, {
+        fetch(apiUrl + '/address/delete/customerAddress/byId?addressId='+addressId, {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -216,7 +216,7 @@
     function deleteCustomer(customerId) {
         var deleterInput = document.getElementById("deleterId")
         if (deleterInput.value == selectedCusData.CUSTOMER_NAME) {
-            fetch('https://apikjb-pdt-integration.cyclic.app/customer/delete/customerById?customerId='+selectedCusData.ID, {
+            fetch(apiUrl + '/customer/delete/customerById?customerId='+selectedCusData.ID, {
                 method: 'GET'
             }).then(res => res.json())
             .then(data => {
@@ -235,7 +235,7 @@
 </script>
 
 <body>
-    
+    <input id="api_url" type="hidden" value="<%= data.api_url %>">
     <div class="container">
         <div class="row c-modify">
             <div class="col-12">

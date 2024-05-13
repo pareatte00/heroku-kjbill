@@ -11,7 +11,7 @@
 </head>
 
 <body>
-
+    <input id="api_url" type="hidden" value="<%= data.api_url %>">
     <input id="ID" type="hidden" value="<%= data.ID %>">
     <input id="BILL_CODE" type="hidden" value="<%= data.BILL_CODE %>">
     <input id="BILL_DATE" type="hidden" value="<%= data.BILL_DATE %>">
@@ -34,6 +34,7 @@
 
 <script>
 
+    var apiUrl = document.getElementById("api_url")
     var billPrinting = document.getElementById("billPrinting")
     var id = document.getElementById("ID").value
     var billCode = document.getElementById("BILL_CODE").value
@@ -59,7 +60,7 @@
     var totalNoVat = 0
     var taxTotal = 0
 
-    fetch('https://apikjb-pdt-integration.cyclic.app/product/getAll/byBillId?billId='+id, {
+    fetch(apiUrl + '/product/getAll/byBillId?billId='+id, {
         method: 'GET'
     }).then(res => res.json())
     .then(data => {

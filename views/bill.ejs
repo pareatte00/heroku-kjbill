@@ -95,6 +95,7 @@
 
 <script>
 
+    var apiUrl = document.getElementById("api_url")
     var noVatCurrentPage = 1
     var vatCurrentPage = 1
 
@@ -126,7 +127,7 @@
             return
         }
         noVatCurrentPage = page.value
-        fetch('https://apikjb-pdt-integration.cyclic.app/bill/get/byType?billTypeId=1&rowPerPage=50&numOfPage='+page.value, {
+        fetch(apiUrl + '/bill/get/byType?billTypeId=1&rowPerPage=50&numOfPage='+page.value, {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -153,7 +154,7 @@
             return
         }
         vatCurrentPage = page.value
-        fetch('https://apikjb-pdt-integration.cyclic.app/bill/get/byType?billTypeId=2&rowPerPage=50&numOfPage='+page.value, {
+        fetch(apiUrl + '/bill/get/byType?billTypeId=2&rowPerPage=50&numOfPage='+page.value, {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -177,7 +178,7 @@
 
     function openRemove(id)
     {
-        fetch('https://apikjb-pdt-integration.cyclic.app/bill/get/byBillId?billId='+id, {
+        fetch(apiUrl + '/bill/get/byBillId?billId='+id, {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -198,7 +199,7 @@
 
     function removeItem(itemId)
     {
-        fetch('https://apikjb-pdt-integration.cyclic.app/bill/delete?billId='+itemId, {
+        fetch(apiUrl + '/bill/delete?billId='+itemId, {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -206,7 +207,7 @@
         })
     }
 
-    fetch('https://apikjb-pdt-integration.cyclic.app/bill/get/byType?billTypeId=1&rowPerPage=50&numOfPage=1', {
+    fetch(apiUrl + '/bill/get/byType?billTypeId=1&rowPerPage=50&numOfPage=1', {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -237,7 +238,7 @@
             npage.innerHTML = "From "+data.payload.pagination.totalPage+" Pages"
             })
 
-    fetch('https://apikjb-pdt-integration.cyclic.app/bill/get/byType?billTypeId=2&rowPerPage=50&numOfPage=1', {
+    fetch(apiUrl + '/bill/get/byType?billTypeId=2&rowPerPage=50&numOfPage=1', {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -275,7 +276,7 @@
 </script>
 
 <body>
-    
+    <input id="api_url" type="hidden" value="<%= data.api_url %>">
     <div class="container">
         <div class="row c-modify">
             <div class="col-12">

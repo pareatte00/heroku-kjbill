@@ -95,6 +95,7 @@
 
 <script>
 
+    var apiUrl = document.getElementById("api_url")
     function populate(s1, s2)
     {
         var s1 = document.getElementById(s1)
@@ -107,7 +108,7 @@
         }else if (s2.id == 'district') {
             s3.innerHTML = ""
             s4.innerHTML = ""
-            fetch('https://apikjb-pdt-integration.cyclic.app/address/get/district?provinceId='+s1.value, {
+            fetch(apiUrl + '/address/get/district?provinceId='+s1.value, {
                 method: 'GET'
             }).then(res => res.json())
             .then(data => {
@@ -126,7 +127,7 @@
                 })
         }else if (s2.id == 'subdistrict') {
             s4.innerHTML = ""
-            fetch('https://apikjb-pdt-integration.cyclic.app/address/get/subDistrict?districtId='+s1.value, {
+            fetch(apiUrl + '/address/get/subDistrict?districtId='+s1.value, {
                 method: 'GET'
             }).then(res => res.json())
             .then(data => {
@@ -146,7 +147,7 @@
         }
     }
 
-    fetch('https://apikjb-pdt-integration.cyclic.app/address/get/province', {
+    fetch(apiUrl + '/address/get/province', {
         method: 'GET'
     }).then(res => res.json())
     .then(data => {
@@ -161,7 +162,7 @@
         elm.appendChild(df);
         })
 
-    fetch('https://apikjb-pdt-integration.cyclic.app/customer/get/allCustomer?rowPerPage=100&numOfPage=1', {
+    fetch(apiUrl + '/customer/get/allCustomer?rowPerPage=100&numOfPage=1', {
         method: 'GET'
     }).then(res => res.json())
     .then(data => {
@@ -179,6 +180,7 @@
 </script>
 
 <body>
+    <input id="api_url" type="hidden" value="<%= data.api_url %>">
     <div class="container mb-5">
         <div class="row c-modify">
         </div>

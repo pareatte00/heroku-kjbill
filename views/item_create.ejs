@@ -94,8 +94,8 @@
 </header>
 
 <script>
-
-    fetch('https://apikjb-pdt-integration.cyclic.app/customer/get/allCustomer?rowPerPage=100&numOfPage=1', {
+    var apiUrl = document.getElementById("api_url")
+    fetch(apiUrl + '/customer/get/allCustomer?rowPerPage=100&numOfPage=1', {
         method: 'GET'
     }).then(res => res.json())
     .then(data => {
@@ -113,6 +113,7 @@
 </script>
 
 <body>
+    <input id="api_url" type="hidden" value="<%= data.api_url %>">
     <div class="container mb-5">
         <div class="row c-modify">
         </div>

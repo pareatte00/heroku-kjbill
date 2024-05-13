@@ -95,6 +95,7 @@
 
 <script>
 
+    var apiUrl = document.getElementById("api_url")
     var arrayList = []
     var vatPercentage = 0
     var listCount = 0
@@ -220,14 +221,14 @@
             s5.value = ""
             s6.value = ""
 
-            fetch('https://apikjb-pdt-integration.cyclic.app/customer/get/customerById?customerId='+elm.value, {
+            fetch(apiUrl + '/customer/get/customerById?customerId='+elm.value, {
                 method: 'GET'
             }).then(res => res.json())
             .then(data => {
                 s1.value = data.payload.data[0].TAXPAYER_NUMBER
             })
 
-            fetch('https://apikjb-pdt-integration.cyclic.app/product/getAll/byCustomerId?customerId='+elm.value+'&rowPerPage=500&numOfPage=1', {
+            fetch(apiUrl + '/product/getAll/byCustomerId?customerId='+elm.value+'&rowPerPage=500&numOfPage=1', {
                 method: 'GET'
             }).then(res => res.json())
             .then(data => {
@@ -312,7 +313,7 @@
                 }
             })
 
-            fetch('https://apikjb-pdt-integration.cyclic.app/address/get/customerAddress/all', {
+            fetch(apiUrl + '/address/get/customerAddress/all', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -362,7 +363,7 @@
             s4.value = ""
             s5.value = ""
             s6.value = ""
-            fetch('https://apikjb-pdt-integration.cyclic.app/address/get/customerAddress/byAddressId', {
+            fetch(apiUrl + '/address/get/customerAddress/byAddressId', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -537,7 +538,7 @@
             elm.classList.remove('text-success')
             return
         }
-        fetch('https://apikjb-pdt-integration.cyclic.app/product/get/byProductCode?productCode='+itemCode, {
+        fetch(apiUrl + '/product/get/byProductCode?productCode='+itemCode, {
             method: 'GET'
         }).then(res => res.json()).then(data => {
             if (data.success == false) {
@@ -651,7 +652,7 @@
         var selectedBillDate = document.getElementById("billDate").value
         var selectedBillCode = document.getElementById("billCode").value
         var selectedRemark = document.getElementById("remark").value
-        fetch('https://apikjb-pdt-integration.cyclic.app/bill/add', {
+        fetch(apiUrl + '/bill/add', {
             method: 'POST',
             headers: {
                 'Authorization': 'Bearer ' + selectedToken,
@@ -695,7 +696,7 @@
         sameBillShower.innerHTML = ""
     }
 
-    fetch('https://apikjb-pdt-integration.cyclic.app/customer/get/allCustomer?rowPerPage=100&numOfPage=1', {
+    fetch(apiUrl + '/customer/get/allCustomer?rowPerPage=100&numOfPage=1', {
         method: 'GET'
     }).then(res => res.json())
     .then(data => {
@@ -715,14 +716,14 @@
         elm.appendChild(df);
     })
 
-    fetch('https://apikjb-pdt-integration.cyclic.app/bill/get/byType?billTypeId=1&rowPerPage=10000&numOfPage=1', {
+    fetch(apiUrl + '/bill/get/byType?billTypeId=1&rowPerPage=10000&numOfPage=1', {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
             allBilling01 = data
     })
 
-    fetch('https://apikjb-pdt-integration.cyclic.app/bill/get/byType?billTypeId=2&rowPerPage=10000&numOfPage=1', {
+    fetch(apiUrl + '/bill/get/byType?billTypeId=2&rowPerPage=10000&numOfPage=1', {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -732,7 +733,7 @@
 </script>
 
 <body>
-
+    <input id="api_url" type="hidden" value="<%= data.api_url %>">
     <div class="container mb-5">
         <input id="token" type="hidden" value="<%= token %>">
         <div class="row c-modify">
