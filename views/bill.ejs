@@ -127,7 +127,7 @@
             return
         }
         noVatCurrentPage = page.value
-        fetch(apiUrl + '/bill/get/byType?billTypeId=1&rowPerPage=50&numOfPage='+page.value, {
+        fetch('https://bill-project-api.onrender.com/bill/get/byType?billTypeId=1&rowPerPage=50&numOfPage='+page.value, {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -154,7 +154,7 @@
             return
         }
         vatCurrentPage = page.value
-        fetch(apiUrl + '/bill/get/byType?billTypeId=2&rowPerPage=50&numOfPage='+page.value, {
+        fetch('https://bill-project-api.onrender.com/bill/get/byType?billTypeId=2&rowPerPage=50&numOfPage='+page.value, {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -178,7 +178,7 @@
 
     function openRemove(id)
     {
-        fetch(apiUrl + '/bill/get/byBillId?billId='+id, {
+        fetch('https://bill-project-api.onrender.com/bill/get/byBillId?billId='+id, {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -199,7 +199,7 @@
 
     function removeItem(itemId)
     {
-        fetch(apiUrl + '/bill/delete?billId='+itemId, {
+        fetch('https://bill-project-api.onrender.com/bill/delete?billId='+itemId, {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -207,7 +207,7 @@
         })
     }
 
-    fetch(apiUrl + '/bill/get/byType?billTypeId=1&rowPerPage=50&numOfPage=1', {
+    fetch('https://bill-project-api.onrender.com/bill/get/byType?billTypeId=1&rowPerPage=50&numOfPage=1', {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -238,7 +238,7 @@
             npage.innerHTML = "From "+data.payload.pagination.totalPage+" Pages"
             })
 
-    fetch(apiUrl + '/bill/get/byType?billTypeId=2&rowPerPage=50&numOfPage=1', {
+    fetch('https://bill-project-api.onrender.com/bill/get/byType?billTypeId=2&rowPerPage=50&numOfPage=1', {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {

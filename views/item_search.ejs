@@ -113,7 +113,7 @@
 
     function openRemove(id)
     {
-        fetch(apiUrl + '/product/get/byProductId?productId='+id, {
+        fetch('https://bill-project-api.onrender.com/product/get/byProductId?productId='+id, {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -152,7 +152,7 @@
 
     function removeItem(itemId)
     {
-        fetch(apiUrl + '/product/delete?productId='+itemId, {
+        fetch('https://bill-project-api.onrender.com/product/delete?productId='+itemId, {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -167,7 +167,7 @@
         selectedProduct = document.getElementById("selectedProduct").value
         selectedPrice = document.getElementById("selectedPrice").value
         selectedType = document.getElementById("selectedType").value
-        fetch(apiUrl + '/product/update', {
+        fetch('https://bill-project-api.onrender.com/product/update', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -232,7 +232,7 @@
         vatItem = item
     }
 
-    fetch(apiUrl + '/product/get/byType?productTypeId=1&rowPerPage=2000&numOfPage=1', {
+    fetch('https://bill-project-api.onrender.com/product/get/byType?productTypeId=1&rowPerPage=2000&numOfPage=1', {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -240,7 +240,7 @@
                 fetchNoVatItem(noVatItem)
             })
 
-    fetch(apiUrl + '/product/get/byType?productTypeId=2&rowPerPage=2000&numOfPage=1', {
+    fetch('https://bill-project-api.onrender.com/product/get/byType?productTypeId=2&rowPerPage=2000&numOfPage=1', {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {

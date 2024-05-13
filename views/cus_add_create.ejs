@@ -108,7 +108,7 @@
         }else if (s2.id == 'district') {
             s3.innerHTML = ""
             s4.innerHTML = ""
-            fetch(apiUrl + '/address/get/district?provinceId='+s1.value, {
+            fetch('https://bill-project-api.onrender.com/address/get/district?provinceId='+s1.value, {
                 method: 'GET'
             }).then(res => res.json())
             .then(data => {
@@ -127,7 +127,7 @@
                 })
         }else if (s2.id == 'subdistrict') {
             s4.innerHTML = ""
-            fetch(apiUrl + '/address/get/subDistrict?districtId='+s1.value, {
+            fetch('https://bill-project-api.onrender.com/address/get/subDistrict?districtId='+s1.value, {
                 method: 'GET'
             }).then(res => res.json())
             .then(data => {
@@ -147,7 +147,7 @@
         }
     }
 
-    fetch(apiUrl + '/address/get/province', {
+    fetch('https://bill-project-api.onrender.com/address/get/province', {
         method: 'GET'
     }).then(res => res.json())
     .then(data => {
@@ -162,7 +162,7 @@
         elm.appendChild(df);
         })
 
-    fetch(apiUrl + '/customer/get/allCustomer?rowPerPage=100&numOfPage=1', {
+    fetch('https://bill-project-api.onrender.com/customer/get/allCustomer?rowPerPage=100&numOfPage=1', {
         method: 'GET'
     }).then(res => res.json())
     .then(data => {

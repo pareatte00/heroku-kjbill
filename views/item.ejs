@@ -127,7 +127,7 @@
             return
         }
         noVatCurrentPage = page.value
-        fetch(apiUrl + '/product/get/byType?productTypeId=1&rowPerPage=10&numOfPage='+page.value, {
+        fetch('https://bill-project-api.onrender.com/product/get/byType?productTypeId=1&rowPerPage=10&numOfPage='+page.value, {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -150,7 +150,7 @@
             return
         }
         vatCurrentPage = page.value
-        fetch(apiUrl + '/product/get/byType?productTypeId=2&rowPerPage=10&numOfPage='+page.value, {
+        fetch('https://bill-project-api.onrender.com/product/get/byType?productTypeId=2&rowPerPage=10&numOfPage='+page.value, {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -168,7 +168,7 @@
             })
     }
 
-    fetch(apiUrl + '/product/get/byType?productTypeId=1&rowPerPage=10&numOfPage=1', {
+    fetch('https://bill-project-api.onrender.com/product/get/byType?productTypeId=1&rowPerPage=10&numOfPage=1', {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -195,7 +195,7 @@
             npage.innerHTML = "From "+data.payload.pagination.totalPage+" Pages"
             })
 
-    fetch(apiUrl + '/product/get/byType?productTypeId=2&rowPerPage=10&numOfPage=1', {
+    fetch('https://bill-project-api.onrender.com/product/get/byType?productTypeId=2&rowPerPage=10&numOfPage=1', {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -224,7 +224,7 @@
 
     function openRemove(id)
     {
-        fetch(apiUrl + '/product/get/byProductId?productId='+id, {
+        fetch('https://bill-project-api.onrender.com/product/get/byProductId?productId='+id, {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
@@ -245,7 +245,7 @@
 
     function removeItem(itemId)
     {
-        fetch(apiUrl + '/product/delete?productId='+itemId, {
+        fetch('https://bill-project-api.onrender.com/product/delete?productId='+itemId, {
             method: 'GET'
         }).then(res => res.json())
         .then(data => {
